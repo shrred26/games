@@ -17,6 +17,7 @@ export default () => (
                 <Route path='/flappy'>
                     <Flappy/>
                 </Route>
+                <Route component={ Flappy } />
             </Switch>
         </Router>
 )
