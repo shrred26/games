@@ -11,7 +11,7 @@ const Game = () => {
                 refY.current = state.y+(state.Vy*action.sec);
                 return {
                     y: refY.current,
-                    Vy: state.Vy-200*action.sec
+                    Vy: state.Vy-400*action.sec
                 }
             
             case 'up':
@@ -69,7 +69,7 @@ const Game = () => {
 
     useEffect(()=>{
         const detectKeyStroke = (e) =>{
-            if(e.key==="ArrowUp") setState({type:'up',Vy: 120});
+            if(e.key==="ArrowUp"||e.which === 32) setState({type:'up',Vy: 200});
         }
         document.addEventListener('keydown',detectKeyStroke);
         return ()=>{document.removeEventListener('keydown',detectKeyStroke);}
@@ -94,7 +94,6 @@ const Game = () => {
         columns.forEach((column)=>{
             if(Math.abs(column.x - 80)<(pipeWidth+birdWidth)/2){
                 const y= refY.current;
-                console.log(y,column.col2,column.col2+gap);
                 if(y<column.col2||y>column.col2+gap) {
                     setGameOver(true);
                 }
@@ -112,7 +111,7 @@ const Game = () => {
             setColumns(columns=>{
                 if(columns.length>0) checkGameOver(columns);
                 const clone = [...columns].map((column)=>({...column,x:column.x - elapsed*150/1000}));
-                if(clone[0]&&clone[0].x<0){ clone.shift(); setScore(sc=>sc+0.5);}
+                if(clone[0]&&clone[0].x<0){ clone.shift(); setScore(sc=> sc+1); }
                 return clone;
             });
             start = timestamp;
