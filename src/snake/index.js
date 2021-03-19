@@ -81,7 +81,7 @@ function App() {
       const copy = [...grid];
       const snakeCopy = [...snake];
       let eat = false;
-      if(copy[newX][newY]==2) eat = true;
+      if(copy[newX][newY]===2) eat = true;
       snakeCopy.unshift([newX,newY]);
       copy[newX][newY] = 1;
       if(!eat){

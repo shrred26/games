@@ -1,6 +1,6 @@
 import {useState,useEffect} from 'react';
 
-export default () => {
+const useArrow = () => {
 
     const [dir,setDir] = useState('ArrowRight');
 
@@ -19,3 +19,5 @@ export default () => {
 
       return dir;
 }
+
+export default useArrow;

@@ -2,13 +2,12 @@ import React from "react";
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 import Snake from "./snake";
 import Flappy from './flappy'
 
-export default () => (
+const Routes = () => (
         <Router>
             <Switch>
                 <Route path='/snake'>
@@ -21,3 +20,5 @@ export default () => (
             </Switch>
         </Router>
 )
+
+export default Routes;
