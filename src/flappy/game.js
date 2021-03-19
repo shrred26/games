@@ -1,5 +1,6 @@
-import './game.css'
-import {useEffect, useReducer, useRef, useState} from 'react'
+import './game.css';
+import {useEffect, useReducer, useRef, useState} from 'react';
+import birdImg from './flappyBird.png';
 
 const Game = () => {
     const refY = useRef(window.innerHeight/2);
@@ -43,6 +44,8 @@ const Game = () => {
     const [score,setScore] = useState(0);
     const [gameOver,setGameOver] = useState(false);
     const gap = 120;
+    const pipeWidth =30;
+    const birdWidth = 50;
 
     useEffect(()=>{
         if(!container) return;
@@ -78,7 +81,7 @@ const Game = () => {
             const col1 = window.innerHeight*1/4 + Math.random()*(window.innerHeight*1/2-120);
             const col2 = window.innerHeight - col1 - 120;
             setColumns(columns=>{
-                const clone = [...columns, {x:window.innerWidth-30,col1,col2}];
+                const clone = [...columns, {x:window.innerWidth-pipeWidth/2,col1,col2}];
                 return clone;
             });
         }
@@ -89,7 +92,7 @@ const Game = () => {
 
     const checkGameOver = (columns) =>{
         columns.forEach((column)=>{
-            if(Math.abs(column.x - 80)<13){
+            if(Math.abs(column.x - 80)<(pipeWidth+birdWidth)/2){
                 const y= refY.current;
                 console.log(y,column.col2,column.col2+gap);
                 if(y<column.col2||y>column.col2+gap) {
@@ -134,9 +137,9 @@ const Game = () => {
                 <h2>Game Over</h2>
                 <button type='button' onClick={reset}>Reset</button>
             </div>}
-            <div className='atCenter' style={{transform:`translate(calc(80px - 50%), ${-y}px)`}}>bird</div>
+            <img src={birdImg} className='atCenter' alt='bird' style={{transform:`translate(calc(80px - 50%), ${-y}px)`}}/>
             {columns.map((column,index)=>(
-                <div key={index} style={{transform:`translate(${column.x}px,0)`}} className='column'>
+                <div key={index} style={{transform:`translate(calc(${column.x}px - 50%),0)`}} className='column'>
                     <div style={{height: `${column.col1}px`}} className='pipe'/>
                     <div style={{height: `120px`}}/>
                     <div style={{height: `${column.col2}px`}} className='pipe'/>
