@@ -1,5 +1,5 @@
 import React from 'react';
-import useCanvas from '../hooks/useCanvas';
+import useCanvas from './useCanvas';
 
 const Canvas = ({draw,preDraw,postDraw,...rest}) => {
     const canvasRef = useCanvas(draw,preDraw,postDraw);
